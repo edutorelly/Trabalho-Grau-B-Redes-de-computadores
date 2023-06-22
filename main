@@ -1,0 +1,74 @@
+import random
+from time import sleep
+
+mi = 0
+ma = 9
+c = 0
+
+def tran1():
+    envia = random.randint(mi,ma) *0.001
+    return envia
+
+def tran2():
+    envia = random.randint(mi,ma) *0.001
+    return envia
+
+def tran3():
+    envia = random.randint(mi,ma) *0.001
+    return envia
+
+for i in range(0, 10):
+    tra1 = tran1()
+    tra2 = tran2()
+    tra3 = tran3()
+    if (c > 5):
+            break
+    if (tra1 == tra2 or tra1 == tra3 or tra3 == tra2) or (range == 9 and c == 0):
+        print('Houve uma colisão, todas as transmissões em backoff.')
+        ma = ma*ma
+        ma += 1
+        c += 1
+        sleep(ma*0.001)
+    elif tra1 > tra2 and tra1 > tra3:
+        print('A transmissão 1 foi recebida com sucesso, a transmissão 2 e a transmissão 3 deverão esperar o meio de transmissão ficar desocupado.')
+        sleep(tra1)
+        if tra2 > tra3:
+            print('Transmissão 2 recebida, a transmissão 3 ainda deve esperar o meio ficar livre.')
+            sleep(tra1)
+            print('transmissão 3 recebida.')
+        if tra2 < tra3:
+            print('Transmissão 3 recebida, a transmissão 2 ainda deve esperar o meio ficar livre.')
+            sleep(tra1)
+            print('transmissão 2 recebida.')
+    elif tra2 > tra1 and tra2 > tra3:
+        print('A transmissão 2 foi recebida com sucesso, a transmissão 1 e a transmissão 3 deverão esperar o meio de transmissão ficar desocupado.')
+        sleep(tra2)
+        if tra1 > tra3:
+            print('Transmissão 1 recebida, transmissão 3 ainda deve esperar o meio ficar livre.')
+            sleep(tra2)
+            print('Transmissão 3 recebida')
+        if tra1 < tra3:
+            print('Transmissão 3 recebida, transmissão 1 ainda deve esperar o meio ficar livre.')
+            sleep(tra2)
+            print('Transmissão 1 recebida')
+    else:
+        print('A transmissão 3 foi recebida com sucesso, a transmissão 1 e a transmissão 2 deverão esperar o meio de transmissão ficar desocupado.')
+        sleep(tra3)
+        if tra1 > tra2:
+            print('Transmissão 1 recebida, transmissão 2 ainda deve esperar o meio ficar livre.')
+            sleep(tra3)
+            print('Transmissão 3 recebida')
+        if tra1 < tra2:
+            print('Transmissão 2 recebida, transmissão 1 ainda deve esperar o meio ficar livre.')
+            sleep(tra3)
+            print('Transmissão 1 recebida')
+    
+
+if c >= 5:
+    print('O programa foi parado por erros demais.')
+
+elif c == 1:
+    print(f'Todas as transmissoes foram terminadas, houve {c} colisão')
+else:
+    print(f'Todas as transmissoes foram terminadas, houveram {c} colisões')
+

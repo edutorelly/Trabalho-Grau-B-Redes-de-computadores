@@ -1,3 +1,4 @@
+#este codigo é em python
 import random
 from time import sleep
 
